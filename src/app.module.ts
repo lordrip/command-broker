@@ -1,13 +1,20 @@
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { ClientModule } from './client/client.module';
+import { ScheduleModule } from '@nestjs/schedule';
+import { configLoader } from './config';
+import { ServerModule } from './server';
+import { ClientModule } from './client';
 
 @Module({
   imports: [
-    ClientModule,
     ConfigModule.forRoot({
-      envFilePath: ['.env.development', '.env'],
+      envFilePath: ['.env'],
+      load: [configLoader],
+      isGlobal: true,
     }),
+    ScheduleModule.forRoot(),
+    ServerModule,
+    ClientModule,
   ],
   controllers: [],
   providers: [],

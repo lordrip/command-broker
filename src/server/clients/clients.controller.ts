@@ -1,10 +1,11 @@
 import { Body, Controller, Get, Post } from '@nestjs/common';
-import { ClientService } from './client.service';
+import { Routes } from '../../config';
+import { ClientsService } from './clients.service';
 import { Client } from './models/client';
 
-@Controller('client')
-export class ClientController {
-  constructor(private readonly clientService: ClientService) {}
+@Controller(Routes.Clients)
+export class ClientsController {
+  constructor(private readonly clientService: ClientsService) {}
 
   @Get()
   getall() {
